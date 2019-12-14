@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有图书首页</title>
+</head>
+<body>
+<a href="/create/">创建</a>
+{%for i in bookInfo %}
+<li>
+    {{i.btitle}}---<a href="/delete/{{i.id}}">删除</a>
+</li>
+{%endfor%}
+</body>
+</html>

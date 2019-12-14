@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+</head>
+<body>
+<h1>{{title}}</h1>
+{%for i in list%}
+{{i}}<br>
+{%endfor%}
+3.提交数据的两种方式：
+get方式:<br/>
+<a href="/show_reqarg/?a=1&b=2&c=python">get方式提交数据</a><br/>
+post方式:<br/>
+<form method="post" action="/show_reqarg/">
+    姓名：<input type="text" name="uname"><br/>
+    性别：男<input type="radio" name="gender" value="男"/>
+    女<input type="radio" name="gender" value="女"/><br/>
+    爱好：
+    吃饭<input type="checkbox" name="hobby" value="吃饭"/>
+    睡觉<input type="checkbox" name="hobby" value="睡觉"/>
+    打豆豆<input type="checkbox" name="hobby" value="打豆豆"/><br>
+    <input type="submit" value="提交">
+</form>
+<br/>
+</body>
+</html>
