@@ -6,26 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -66,7 +47,7 @@ instance/
 .webassets-cache
 
 # Scrapy stuff:
-.scrapy
+
 
 # Sphinx documentation
 docs/_build/
@@ -102,13 +83,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+
 
 # Spyder project settings
 .spyderproject
@@ -116,7 +91,7 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
-
+/migrations
 # mkdocs documentation
 /site
 

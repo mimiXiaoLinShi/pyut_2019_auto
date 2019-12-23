@@ -6,7 +6,7 @@ from myAdmin import views
 urlpatterns = [
 
     # url(r'^index$', views.index),
-    url(r'^indexbook/$', views.indexBook),
+    url(r'^indexbook/(P<city>[a-z]/(?P<year>\D{4})$', views.indexBook),
     url(r'^indexinfo/(\d+)/$', views.indexHeroInfo),
     url(r'^delete/(\d+)/$', views.delete),
     url(r'^create/$', views.create),
