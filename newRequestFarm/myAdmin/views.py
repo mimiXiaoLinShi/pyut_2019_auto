@@ -14,8 +14,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # from config.globals import debugLogger
+from django.utils.decorators import method_decorator
+from django.views import View
+
 from newRequestFarm import settings
-from newRequestFarm.config.globals import debugLogger
+from config.globals import debugLogger
 
 
 from .models import BookInfo
@@ -114,6 +117,7 @@ def first_page(request):
 
 
 
+
 # def index(request):
 #     template = loader.get_template('adminTemplates/index.html')
 #     str = '%s,%s' % (request.path, request.encoding)
@@ -125,7 +129,7 @@ def first_page(request):
 #     return render(request, 'adminTemplates/index_old.html', context)
 
 
-def indexBook(request):
+def indexBook(request, city, year):
     bookInfo = BookInfo.objects.all()
     return render(request, 'adminTemplates/indexBook.html', {'bookInfo': bookInfo})
 
@@ -137,13 +141,48 @@ def create(request):
     #转向到首页
     return redirect('/indexbook/')
 
+def my_decorator(view_func):
+    def wrapper(request,  *args, **kwargs):
 
-def indexHeroInfo(request, dir):
-    str = '%s,%s' % (request.path, request.encoding)
-    print(str)
-    book = BookInfo.objects.get(id=int(dir))
-    bookObj = book.heroinfo_set.all()
-    return render(request, 'adminTemplates/indexHero.html', {'bookObj': bookObj})
+        print('装饰器被调用')
+        return view_func( request, *args, **kwargs)
+        return wrapper
+
+# 使用扩展类
+class BaseView(View):
+    @classmethod
+    def as_view(cls,*args, **kwargs):
+        # 添加装饰器
+        view = my_decorator(super().as_view(*args, **kwargs))
+        return view
+
+class HeroInfo(BaseView):
+    def get(self, request, dir):
+        str = '%s,%s' % (request.path, request.encoding)
+        print(str)
+        # book = BookInfo.objects.get(id=int(dir))
+        # print('------------', book)
+        # bookObj = book.heroinfo_set.all()
+        # print(bookObj)
+        # return render(request, 'adminTemplates/indexHero.html', {'bookObj': bookObj})
+        return HttpResponse('45555555555')
+
+
+# class HeroInfo(View):
+#     @method_decorator(my_decorator)
+#     def dispath(self, request, *args, **kwargs):    # 重写dispath方法
+#         super().dispath(request, *args, **kwargs)
+
+    # @method_decorator(my_decorator)      # 只对get方法家装饰器
+    # def get(self, request, dir):
+    #     str = '%s,%s' % (request.path, request.encoding)
+    #     print(str)
+    #     # book = BookInfo.objects.get(id=int(dir))
+    #     # print('------------', book)
+    #     # bookObj = book.heroinfo_set.all()
+    #     # print(bookObj)
+    #     # return render(request, 'adminTemplates/indexHero.html', {'bookObj': bookObj})
+    #     return HttpResponse('45555555555')
 
 
 #逻辑删除指定编号的图书
