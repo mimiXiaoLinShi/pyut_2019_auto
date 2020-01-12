@@ -31,16 +31,18 @@ class HeroInfo(models.Model):
     def __str__(self):
         return self.hname
 
-class PicTest(models.Model):
-    pic = models.ImageField(upload_to='booktest/')  # 上传图片存储数据表
+# class PicTest(models.Model):
+#     pic = models.ImageField(upload_to='booktest/')  # 上传图片存储数据表
+
+######################################################################################
 
 class CaseNumber(models.Model):
     case_number = models.CharField(max_length=20, verbose_name='用编号')
-    case_desc = models.CharField(max_length=20,null=True, blank=True, verbose_name='用例描述' )
+    case_desc = models.CharField(max_length=20, null=True, blank=True, verbose_name='用例描述' )
     def __str__(self):
         return self.case_number
     class Meta:
-        verbose_name='用例编号'
+        verbose_name = '用例编号'
 
 class module(models.Model):
     module_name = models.CharField(max_length=20, verbose_name='模块名')

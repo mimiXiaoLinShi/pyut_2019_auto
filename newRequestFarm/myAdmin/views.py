@@ -6,6 +6,7 @@ import base64
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.core.serializers import json
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -16,12 +17,12 @@ from django.shortcuts import render
 # from config.globals import debugLogger
 from django.utils.decorators import method_decorator
 from django.views import View
+from rest_framework.response import Response
 
-from newRequestFarm import settings
 from config.globals import debugLogger
 
 
-from .models import BookInfo
+
 from datetime import date
 import sys
 # sys.setdefaultencoding('utf8')
@@ -156,7 +157,7 @@ class BaseView(View):
         view = my_decorator(super().as_view(*args, **kwargs))
         return view
 
-class HeroInfo(BaseView):
+class HeroInfo(View):
     def get(self, request, dir):
         str = '%s,%s' % (request.path, request.encoding)
         print(str)
@@ -173,7 +174,7 @@ class HeroInfo(BaseView):
 #     def dispath(self, request, *args, **kwargs):    # 重写dispath方法
 #         super().dispath(request, *args, **kwargs)
 
-    # @method_decorator(my_decorator)      # 只对get方法家装饰器
+    # @method_decorator(my_decorator)      # 只对get方法加装饰器
     # def get(self, request, dir):
     #     str = '%s,%s' % (request.path, request.encoding)
     #     print(str)
@@ -205,16 +206,26 @@ def show_reqarg(request):
         hobbys = request.POST.getlist('hobby')
         return render(request, 'adminTemplates/show_postarg.html', {'name':name, 'gender':gender, 'hobbys':hobbys})
 
-# 返回图片上传页面url:
-def pic_upload(request):
-    return render(request, 'booktest/pic_pload.html')
 
-#上传图片保存图片路径
-def pic_handle(request):
-    f1=request.FILES.get('pic')
-    fname='%s/booktest/%s'%(settings.MEDIA_ROOT,f1.name)
-    with open(fname,'wb') as pic:
-        for c in f1.chunks():        # 一部分一部分读取图片内容
-            pic.write(c)
-    return HttpResponse('OK')
 
+
+#-------------------------------------------------------------------------------
+from myAdmin.serializer import caseSerializer
+from rest_framework.generics import GenericAPIView
+from .models import BookInfo, CaseNumber
+
+
+class caseList(GenericAPIView):
+    queryset = CaseNumber.objects.all()
+    serializer_class = caseSerializer
+    # def get(self,request, pk):
+    #     self.lookup_field = 'case_name'
+    #     case = self.get_object()
+    #     serializer = self.get_serializr(case)
+    #     return Response(serializer.data)
+
+    def get(self, request):
+        queryset = self.filter_queryset(self.get_queryset())
+        serilizer = self.get_serializer(queryset, many=True)
+
+        return Response({'data': serilizer.data}, template_name='booktest/pic_pload.html')

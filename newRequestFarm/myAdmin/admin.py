@@ -6,21 +6,26 @@ from django.contrib import admin
 # Register your models here.
 from django.db.models import Q
 
-from .models import HeroInfo, BookInfo, PicTest, CaseNumber, module, ProjectNumber, ProjectModule
+from .models import HeroInfo, BookInfo, CaseNumber, module, ProjectNumber, ProjectModule
 
 from django.contrib import admin
 
-class BookInfoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'btitle', 'bdata', 'tle']  # 商品详情业显示的内容
-    list_per_page = 2      # 商品分页数
-    actions_on_top = True   # 上部显示属性
-    actions_on_bottom = True   # 底部显示属性
-    list_filter = ['btitle']   # 用户快速过滤字段
-    search_fields = ['btitle']   # 搜索框，用于快速搜索
+# class BookInfoAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'btitle', 'bdata', 'tle']  # 商品详情业显示的内容
+#     list_per_page = 2      # 商品分页数
+#     actions_on_top = True   # 上部显示属性
+#     actions_on_bottom = True   # 底部显示属性
+#     list_filter = ['btitle']   # 用户快速过滤字段
+#     search_fields = ['btitle']   # 搜索框，用于快速搜索
 
-class HeroInfoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'hname', 'hbook']
-    action_on_bottom = True
+# class HeroInfoAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'hname', 'hbook']
+#     action_on_bottom = True
+
+# admin.site.register(BookInfo, BookInfoAdmin)
+# admin.site.register(HeroInfo, HeroInfoAdmin)
+# admin.site.register(PicTest)
+
 
 class caseNumberAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
@@ -95,7 +100,3 @@ admin.site.register(module, moduleAdmin)
 admin.site.register(CaseNumber, caseNumberAdmin)
 
 
-
-admin.site.register(BookInfo, BookInfoAdmin)
-admin.site.register(HeroInfo, HeroInfoAdmin)
-admin.site.register(PicTest)
