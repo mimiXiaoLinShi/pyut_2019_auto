@@ -218,3 +218,6 @@ def pic_handle(request):
             pic.write(c)
     return HttpResponse('OK')
 
+
+
+
