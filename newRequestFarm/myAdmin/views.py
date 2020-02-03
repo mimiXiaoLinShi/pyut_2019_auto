@@ -209,7 +209,6 @@ def show_reqarg(request):
 
 
 
-#-------------------------------------------------------------------------------
 from myAdmin.serializer import caseSerializer
 from rest_framework.generics import GenericAPIView
 from .models import BookInfo, CaseNumber
