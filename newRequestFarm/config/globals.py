@@ -15,7 +15,7 @@ print(OS_DIR)
 
 
 class Globals:
-    OS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     ISDICT_VARS = 2 # 必填
     # ISDICT_VARS = 2
     ENV_CLASS = 3

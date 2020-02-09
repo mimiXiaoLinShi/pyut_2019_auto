@@ -78,6 +78,6 @@ def removeFile(files, isDir=None):
 if __name__ == '__main__':
     path = G.OS_DIR + r'\config\globals.py'
     # D:\Project\pyut_outo_test\newRequestFarm\config\globals.py
-    kwar = {'GlablasName':'Globals', 'Globalscenter':{'ISDICT_VARS':'999999', 'TBL_SLL_BEE': 'nihao'}, 'OSPATH': path}
+    kwar = {'GlablasName':'Globals', 'Globalscenter':{'ISDICT_VARS':'999999', 'TBL_SLL_BEE': 'nihao'}}
     debugLogger.info('nihaoa habazai=========================')
     rewritingFile(**kwar)
